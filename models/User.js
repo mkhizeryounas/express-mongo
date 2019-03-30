@@ -12,7 +12,8 @@ var Schema = new mongoose.Schema(
       required: true,
       dropDups: true
     },
-    password: { type: String, required: true, set: common.hash }
+    password: { type: String, required: true, set: common.hash },
+    address: Object
   },
   {
     timestamps: true
@@ -32,5 +33,6 @@ Schema.methods.checkPassword = async function(password) {
   }
   throw { status: 401 };
 };
+console.log("Methods", Schema.methods);
 
 module.exports = db.model("User", Schema);

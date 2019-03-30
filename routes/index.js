@@ -10,9 +10,15 @@ router.get("/", async function(req, res, next) {
 router.get("/create-user", async function(req, res, next) {
   try {
     let newUser = new User({
-      name: "Falen",
-      email: "m.khizeryounas@gmail.com",
-      password: "123"
+      name: "Khizer Younas",
+      email: `m.khizeryounas${Math.random()}@gmail.com`,
+      password: "123",
+      address: {
+        address_1: "H No. 13-B, Samsani Road, Multan Road",
+        city: "Lahore",
+        country: "Pakistan",
+        zip: "5400"
+      }
     });
     let r = await newUser.save();
     console.log(r);
