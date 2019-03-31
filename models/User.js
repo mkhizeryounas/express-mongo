@@ -1,9 +1,8 @@
-const mongoose = require("mongoose"),
-  db = require("../config/db");
+const mongoose = require("mongoose");
 const { isEmail } = require("validator");
 const common = require("../src/modules/common");
 
-var Schema = new mongoose.Schema(
+var UserSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: {
@@ -13,26 +12,30 @@ var Schema = new mongoose.Schema(
       dropDups: true
     },
     password: { type: String, required: true, set: common.hash },
-    address: Object
+    address: {
+      address_1: String,
+      city: String,
+      country: String,
+      zip: String
+    }
   },
   {
     timestamps: true
   }
 );
 
-Schema.methods.toJSON = function() {
+UserSchema.methods.toJSON = function() {
   var obj = this.toObject();
   delete obj.password;
   return obj;
 };
 
-Schema.methods.checkPassword = async function(password) {
+UserSchema.methods.checkPassword = async function(password) {
   if (common.hash(password) === this.password) {
     console.log(this);
     return this;
   }
   throw { status: 401 };
 };
-console.log("Methods", Schema.methods);
 
-module.exports = db.model("User", Schema);
+module.exports = mongoose.model("User", UserSchema);
