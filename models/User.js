@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { isEmail } = require("validator");
 const common = require("../src/modules/common");
 
-var UserSchema = new mongoose.Schema(
+var userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: {
@@ -24,13 +24,13 @@ var UserSchema = new mongoose.Schema(
   }
 );
 
-UserSchema.methods.toJSON = function() {
+userSchema.methods.toJSON = function() {
   var obj = this.toObject();
   delete obj.password;
   return obj;
 };
 
-UserSchema.methods.checkPassword = async function(password) {
+userSchema.methods.checkPassword = async function(password) {
   if (common.hash(password) === this.password) {
     console.log(this);
     return this;
@@ -38,4 +38,4 @@ UserSchema.methods.checkPassword = async function(password) {
   throw { status: 401 };
 };
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", userSchema);
