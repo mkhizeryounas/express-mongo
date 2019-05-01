@@ -4,6 +4,7 @@ Boilerplate for node express project with mongodb, joi, response middleware &amp
 
 ### MongoDB Connection String
 
+
 ```
 mongodb://localhost:27017/db
 ```
