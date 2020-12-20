@@ -1,54 +1,49 @@
-var HttpStatus = require("http-status-codes");
-module.exports = function(req, res, next) {
-  res.reply = responseJson => {
-    let data =
-      typeof responseJson.data === "undefined" ? {} : responseJson.data;
-    let statusCode =
-      typeof responseJson.statusCode === "undefined"
+const HttpStatus = require('http-status-codes');
+
+const commonMessages = {
+  200: 'Request processed successfully.',
+  201: 'New entry has been created.',
+  400: 'The request by the client was not processed, as the server could not understand what the client is asking for.',
+  401: 'The client is not allowed to access resources, and should re-request with the required credentials.',
+  403: 'The client is not allowed access the resource.',
+  404: 'The requested resource is not available.',
+  500: 'Request can not be processed due to unexpected internal server error.',
+  503: 'Server is down or unavailable to receive and process the request',
+};
+
+const generateMessage = (code) => {
+  const message = commonMessages.hasOwnProperty(code)
+    ? commonMessages[code]
+    : null;
+  return message;
+};
+
+module.exports = function (req, res, next) {
+  res.reply = (responseJson) => {
+    const data =
+      typeof responseJson.data === 'undefined' ? {} : responseJson.data;
+    const statusCode =
+      typeof responseJson.statusCode === 'undefined'
         ? 200
         : responseJson.statusCode;
     let message =
-      typeof responseJson.message === "undefined"
+      typeof responseJson.message === 'undefined'
         ? generateMessage(statusCode)
         : responseJson.message;
 
-    let statusCodeText = HttpStatus.getStatusText(statusCode);
+    const statusCodeText = HttpStatus.getStatusText(statusCode);
     message = message !== null ? message : statusCodeText;
-    let result = {
-      status: false,
-      responseStatus: statusCodeText
-        .toUpperCase()
-        .split(" ")
-        .join("_"),
-      message: message
+    const result = {
+      success: false,
+      responseStatus: statusCodeText.toUpperCase().split(' ').join('_'),
+      message,
     };
     if (statusCode >= 300) {
       return res
         .status(statusCode)
-        .send({ ...result, status: false, error: data });
+        .send({ ...result, success: false, error: data });
     }
-    return res.status(statusCode).send({ ...result, status: true, data: data });
+    return res.status(statusCode).send({ ...result, success: true, data });
   };
   next();
-};
-
-function generateMessage(code) {
-  let message = common_messages.hasOwnProperty(code)
-    ? common_messages[code]
-    : null;
-  return message;
-}
-
-let common_messages = {
-  "200": "Request processed successfully.",
-  "201": "New entry has been created.",
-  "400":
-    "The request by the client was not processed, as the server could not understand what the client is asking for.",
-  "401":
-    "The client is not allowed to access resources, and should re-request with the required credentials.",
-  "403": "The client is not allowed access the resource.",
-  "404": "The requested resource is not available.",
-  "500":
-    "Request can not be processed due to unexpected internal server error.",
-  "503": "Server is down or unavailable to receive and process the request"
 };

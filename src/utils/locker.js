@@ -1,23 +1,25 @@
-var jwt = require('jsonwebtoken');
-const common = require('./common');
-const cert = require('../../config/keys').secret;
+import jwt from 'jsonwebtoken';
+import common from './common';
+import { secret as cert } from '../config/keys';
 
-let data = {
+const data = {
   unlock: (request, response, next) => {
     let authHeader = request.headers['authorization'] || '';
     if (typeof authHeader !== 'undefined' && authHeader.includes('Bearer ')) {
       authHeader = authHeader.substring(7);
       jwt.verify(authHeader, cert, (err, decode) => {
         try {
-          if (err) throw authHeader;
+          if (err) {
+            throw authHeader;
+          }
           request.user = decode;
-          next();
+          return next();
         } catch (error) {
-          response.reply({ statusCode: 401 });
+          return response.reply({ statusCode: 401, data: error });
         }
       });
     } else {
-      response.reply({ statusCode: 401 });
+      return response.reply({ statusCode: 401 });
     }
   },
   lock: (obj) => {
@@ -28,4 +30,4 @@ let data = {
   },
 };
 
-module.exports = data;
+export default data;

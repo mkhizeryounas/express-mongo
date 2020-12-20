@@ -1,43 +1,40 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const routes = require('./src/config/routes');
+require('./src/config/db');
 
-var app = express();
+const app = express();
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, 'src', 'views'));
+app.set('view engine', 'ejs');
 
-app.use(logger("dev"));
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-app.use(require("./src/middlewares/response"));
-app.use(require("cors")());
+app.use(express.static(path.join(__dirname, 'src', 'public')));
+app.use(require('./src/middlewares/response'));
+app.use(require('cors')());
 
-// MongoDB
-require("./config/db");
-
-// Routes
-const routes = require("./config/routes");
 routes(app);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res) {
   res.reply({ statusCode: 404 });
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   // res.locals.error = req.app.get("env") === "development" ? err : {};
-  console.log("ERROR:", err);
-  if (err.isJoi || err.hasOwnProperty("errors") || err.name === "MongoError")
+  console.log('ERROR:', err);
+  if (err.isJoi || err.hasOwnProperty('errors') || err.name === 'MongoError') {
     err.status = 422;
+  }
   res.reply({ data: err.message, statusCode: err.status || 500 });
 });
 

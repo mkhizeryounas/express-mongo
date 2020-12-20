@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const { isEmail } = require('validator');
-const common = require('../src/modules/common');
+import mongoose from 'mongoose';
+import { isEmail } from 'validator';
+import common from '../utils/common';
 
-var userSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: {
