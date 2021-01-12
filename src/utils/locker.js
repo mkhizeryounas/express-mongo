@@ -15,7 +15,7 @@ module.exports = {
       }
       authHeader = authHeader.replace(tokenType, '');
       request.user = jwt.verify(authHeader, cert);
-      next();
+      return next();
     } catch (err) {
       console.log('Auth failed:', err.message);
       return response.reply({ statusCode: 401 });

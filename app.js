@@ -44,6 +44,7 @@ app.use(function (err, req, res, next) {
       ? err
       : err.data,
   });
+  next();
 });
 
 module.exports = app;
