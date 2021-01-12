@@ -27,7 +27,7 @@ app.use(function (req, res) {
 });
 
 // error handler
-app.use(function (err, req, res) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   // res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -35,7 +35,15 @@ app.use(function (err, req, res) {
   if (err.isJoi || err.hasOwnProperty('errors') || err.name === 'MongoError') {
     err.status = 422;
   }
-  res.reply({ data: err.message, statusCode: err.status || 500 });
+  res.reply({
+    message: err.message,
+    statusCode: err.status || 400,
+    data: err.hasOwnProperty('errors')
+      ? err.errors
+      : err.name === 'MongoError'
+      ? err
+      : err.data,
+  });
 });
 
 module.exports = app;

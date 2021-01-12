@@ -2,32 +2,29 @@ import jwt from 'jsonwebtoken';
 import common from './common';
 import { secret as cert } from '../config/keys';
 
-const data = {
-  unlock: (request, response, next) => {
-    let authHeader = request.headers['authorization'] || '';
-    if (typeof authHeader !== 'undefined' && authHeader.includes('Bearer ')) {
-      authHeader = authHeader.substring(7);
-      jwt.verify(authHeader, cert, (err, decode) => {
-        try {
-          if (err) {
-            throw authHeader;
-          }
-          request.user = decode;
-          return next();
-        } catch (error) {
-          return response.reply({ statusCode: 401, data: error });
-        }
-      });
-    } else {
+module.exports = {
+  unlock: async (request, response, next) => {
+    try {
+      let authHeader = request.headers['authorization'] || '';
+      const tokenType = 'Bearer ';
+      if (
+        typeof authHeader === 'undefined' ||
+        !authHeader.includes(tokenType)
+      ) {
+        throw Error('Authentication token missing');
+      }
+      authHeader = authHeader.replace(tokenType, '');
+      request.user = jwt.verify(authHeader, cert);
+      next();
+    } catch (err) {
+      console.log('Auth failed:', err.message);
       return response.reply({ statusCode: 401 });
     }
   },
   lock: (obj) => {
     obj['iat'] = common.time();
     // obj["exp"] = common.time() + 60 * 60 * 24;
-    obj['access_token'] = jwt.sign(obj, cert);
+    obj['accessToken'] = jwt.sign(obj, cert);
     return obj;
   },
 };
-
-export default data;

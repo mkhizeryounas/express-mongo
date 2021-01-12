@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { isEmail } from 'validator';
 import common from '../utils/common';
+import { ENUMS } from '../controllers/user/user.validator';
 
 const userSchema = new mongoose.Schema(
   {
@@ -13,6 +14,7 @@ const userSchema = new mongoose.Schema(
       index: true,
     },
     password: { type: String, required: true, set: common.hash },
+    scope: { type: String, default: 'USER', enum: ENUMS.SCOPES },
   },
   {
     timestamps: true,
