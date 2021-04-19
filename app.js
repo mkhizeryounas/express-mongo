@@ -3,9 +3,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const routes = require('./src/config/routes');
-require('./src/config/db');
 
 const app = express();
+
+app.set('DB', require('./src/config/db'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'src', 'views'));
