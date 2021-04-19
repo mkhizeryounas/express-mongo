@@ -1,26 +1,23 @@
 import mongoose from 'mongoose';
 import { isEmail } from 'validator';
+import mongoosePaginate from 'mongoose-paginate-v2';
 import common from '../utils/common';
 import { ENUMS } from '../controllers/user/user.validator';
 
-const userSchema = new mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    email: {
-      type: String,
-      validate: [isEmail],
-      required: true,
-      unique: true,
-      index: true,
-    },
-    password: { type: String, required: true, set: common.hash },
-    scope: { type: String, default: 'USER', enum: ENUMS.SCOPES },
+import Schema from './SchemaBuilder';
+
+const userSchema = Schema({
+  name: { type: String, required: true },
+  email: {
+    type: String,
+    validate: [isEmail],
+    required: true,
+    unique: true,
+    index: true,
   },
-  {
-    timestamps: true,
-    strict: true,
-  }
-);
+  password: { type: String, required: true, set: common.hash },
+  scope: { type: String, default: 'USER', enum: ENUMS.SCOPES },
+});
 
 userSchema.methods.toJSON = function () {
   var obj = this.toObject();
@@ -35,5 +32,7 @@ userSchema.methods.checkPassword = async function (password) {
   }
   throw { status: 401 };
 };
+
+feedbackCommentSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('User', userSchema);
