@@ -4,7 +4,7 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 import common from '../utils/common';
 import { ENUMS } from '../controllers/user/user.validator';
 
-import Schema from './SchemaBuilder';
+import Schema from '../utils/schema-builder';
 
 const userSchema = Schema({
   name: { type: String, required: true },
