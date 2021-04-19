@@ -2,8 +2,8 @@ export const create = async ({ Model, args }) => {
   return Model.create(args);
 };
 
-export const list = async ({ Model, args }) => {
-  return Model.paginate({}, { ...args });
+export const list = async ({ Model, args = {}, query = {} }) => {
+  return Model.paginate(query, args);
 };
 
 export const single = async ({ Model, id }) => {
