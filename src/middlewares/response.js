@@ -1,6 +1,6 @@
 const HttpStatus = require('http-status-codes');
 
-const commonMessages = {
+const COMMON_MESSAGES = {
   200: 'Request processed successfully.',
   201: 'New entry has been created.',
   400: 'The request by the client was not processed, as the server could not understand what the client is asking for.',
@@ -12,8 +12,8 @@ const commonMessages = {
 };
 
 const generateMessage = (code) => {
-  const message = commonMessages.hasOwnProperty(code)
-    ? commonMessages[code]
+  const message = COMMON_MESSAGES.hasOwnProperty(code)
+    ? COMMON_MESSAGES[code]
     : null;
   return message;
 };
