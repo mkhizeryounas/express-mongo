@@ -33,6 +33,6 @@ userSchema.methods.checkPassword = async function (password) {
   throw { status: 401 };
 };
 
-feedbackCommentSchema.plugin(mongoosePaginate);
+userSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('User', userSchema);
