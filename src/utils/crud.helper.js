@@ -26,3 +26,17 @@ export const remove = async ({ Model, id }) => {
   };
   return Model.findOneAndRemove(args);
 };
+
+export const softDelete = async ({ Model, id }) => {
+  const args = {
+    _id: id,
+  };
+  return Model.delete(args);
+};
+
+export const restore = async ({ Model, id }) => {
+  const args = {
+    _id: id,
+  };
+  return Model.restore(args);
+};

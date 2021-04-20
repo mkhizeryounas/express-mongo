@@ -19,15 +19,29 @@ export const create = async (
     args.scope = 'USER';
   }
 
-  return User.create(args);
+  const isDuplicateUser = await User.findOne({ email });
+
+  if (!isDuplicateUser) {
+    return User.create(args);
+  } else if (isDuplicateUser.deleted === true) {
+    return isDuplicateUser.restore();
+  } else {
+    throw {
+      status: 409,
+      message: `An account with email '${email}' already exisits`,
+    }; // Duplicate
+  }
 };
 
 export const signin = async ({ email, password }) => {
   const args = {
     email,
     password,
+    deleted: false,
   };
   const user = await User.findOne(args);
-
+  if (!user) {
+    throw { status: 401 };
+  }
   return lock(user.toJSON());
 };

@@ -3,6 +3,7 @@ import { unlock } from '../utils/locker';
 import validate from 'express-validation';
 import * as userController from '../controllers/user/user.controller';
 import * as userValidator from '../controllers/user/user.validator';
+
 const router = express.Router();
 
 router.get('/me', unlock, async function (req, res, next) {

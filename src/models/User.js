@@ -3,7 +3,7 @@ import { isEmail } from 'validator';
 import mongoosePaginate from 'mongoose-paginate-v2';
 import common from '../utils/common';
 import { ENUMS } from '../controllers/user/user.validator';
-
+import mongooseDelete from 'mongoose-delete';
 import Schema from '../utils/schema-builder';
 
 const userSchema = Schema({
@@ -34,5 +34,6 @@ userSchema.methods.checkPassword = async function (password) {
 };
 
 userSchema.plugin(mongoosePaginate);
+userSchema.plugin(mongooseDelete);
 
 module.exports = mongoose.model('User', userSchema);
