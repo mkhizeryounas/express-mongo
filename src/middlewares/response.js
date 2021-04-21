@@ -34,16 +34,13 @@ module.exports = function (req, res, next) {
     const statusCodeText = HttpStatus.getStatusText(statusCode);
     message = message !== null ? message : statusCodeText;
     const result = {
-      success: false,
-      responseStatus: statusCodeText.toUpperCase().split(' ').join('_'),
+      status: statusCodeText.toUpperCase().split(' ').join('_'),
       message,
     };
-    if (statusCode >= 300) {
-      return res
-        .status(statusCode)
-        .send({ ...result, success: false, error: data });
+    if (statusCode >= 400) {
+      return res.status(statusCode).send({ ...result, error: data });
     }
-    return res.status(statusCode).send({ ...result, success: true, data });
+    return res.status(statusCode).send(data); // { ...result, success: true, data }
   };
   next();
 };
