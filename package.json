@@ -6,10 +6,14 @@
     "start": "NODE_ENV=production node ./server.js",
     "test": "jest",
     "dev": "nodemon ./server.js",
-    "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '🚀 Linter passed'"
+    "precommit-msg": "echo '🚀 Pre-commit checks...' && exit 0",
+    "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '🚀 Linter passed'",
+    "format": "pretty-quick --staged"
   },
   "pre-commit": [
-    "lint"
+    "precommit-msg",
+    "lint",
+    "format"
   ],
   "dependencies": {
     "@babel/core": "^7.0.0",
@@ -46,6 +50,8 @@
     "jest": "^26.6.3",
     "nodemon": "^2.0.4",
     "pre-commit": "^1.2.2",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
     "supertest": "^6.0.1"
   }
 }
