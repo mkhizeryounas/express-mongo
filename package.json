@@ -7,7 +7,7 @@
     "test": "jest",
     "dev": "nodemon ./server.js",
     "precommit-msg": "echo '🚀 Pre-commit checks...' && exit 0",
-    "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '✨ Linter passed'",
+    "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '✨ Linter passed!'",
     "format": "pretty-quick --staged"
   },
   "pre-commit": [
