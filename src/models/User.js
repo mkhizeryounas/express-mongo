@@ -18,7 +18,6 @@ const userSchema = Schema({
   password: { type: String, required: true, set: common.hash },
   scope: { type: String, default: 'USER', enum: ENUMS.SCOPES },
 });
-
 userSchema.methods.toJSON = function () {
   var obj = this.toObject();
   delete obj.password;
