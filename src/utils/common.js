@@ -1,4 +1,4 @@
-import keys from '../config/keys';
+import { SECRET } from '../config/keys';
 import sha256 from 'sha256';
 import Joi from 'joi';
 
@@ -10,7 +10,7 @@ module.exports = {
     return Math.floor(new Date() / 1000);
   },
   hash: (str) => {
-    return sha256(str + keys.secret);
+    return sha256(str + SECRET);
   },
   validate: async (obj, schema) => {
     return new Promise((resolve, reject) => {

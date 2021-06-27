@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import common from './common';
-import { secret as cert } from '../config/keys';
+import { SECRET as cert } from '../config/keys';
 
 module.exports = {
   unlock: async (request, response, next) => {

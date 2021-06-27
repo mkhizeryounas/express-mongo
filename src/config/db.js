@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
-var keys = require('./keys');
+var { MONGO_CONNECTION_STRING } = require('./keys');
 
-mongoose.connect(keys.mongodb, {
+mongoose.connect(MONGO_CONNECTION_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
