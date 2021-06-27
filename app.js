@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const routes = require('./src/config/routes');
+const setupJsdocSwaggerAndUI = require('./src/middlewares/swagger.js');
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src', 'public')));
 app.use(require('./src/middlewares/response'));
 app.use(require('cors')());
+
+setupJsdocSwaggerAndUI(app);
 
 routes(app);
 
