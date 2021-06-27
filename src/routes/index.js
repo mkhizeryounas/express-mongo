@@ -5,13 +5,13 @@ const router = express.Router();
 /**
  * @swagger
  * components:
- *   schemas:
- *     About:
- *       type: object
- *       properties:
- *         about:
- *           type: string
- *           description: Information about the service
+ *  schemas:
+ *    About:
+ *      type: object
+ *      properties:
+ *        about:
+ *          type: string
+ *          description: Information about the service
  */
 
 /**
@@ -24,16 +24,16 @@ const router = express.Router();
 /**
  * @swagger
  * /:
- *   get:
- *     description: About the service
- *     tags: [About]
- *     responses:
- *       200:
- *         description: Returns a welcome message.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/About'
+ *  get:
+ *    description: About the service
+ *    tags: [About]
+ *    responses:
+ *      200:
+ *        description: Returns a welcome message.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/About'
  */
 router.get('/', async function (req, res) {
   res.reply({ data: { about: `${name} service is working fine` } });
