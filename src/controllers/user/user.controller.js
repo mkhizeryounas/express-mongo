@@ -37,7 +37,6 @@ export const signin = async ({ email, password }) => {
   const args = {
     email,
     password,
-    deleted: false,
   };
   const user = await User.findOne(args);
   if (!user) {
