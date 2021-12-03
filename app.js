@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'src', 'public')));
 app.use(require('./src/middlewares/response'));
 app.use(require('cors')());
 
-routes(app);
+app.use('/v1', routes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {
