@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const routes = require('./src/config/routes');
 
 const app = express();
 
@@ -20,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'src', 'public')));
 app.use(require('./src/middlewares/response'));
 app.use(require('cors')());
 
-app.use('/v1', routes);
+app.use('/', require('./src/config/routes'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {
