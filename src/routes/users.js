@@ -1,8 +1,8 @@
 import express from 'express';
 import { unlock } from '../utils/locker';
 import validate from 'express-validation';
-import * as userController from '../controllers/user';
-import * as userValidator from '../controllers/user/validator';
+import * as userController from '../controllers/user/user.controller';
+import * as userValidator from '../controllers/user/user.validator';
 
 const router = express.Router();
 

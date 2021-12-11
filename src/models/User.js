@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { isEmail } from 'validator';
 import mongoosePaginate from 'mongoose-paginate-v2';
 import common from '../utils/common';
-import { ENUMS } from '../controllers/user/validator';
+import { ENUMS } from '../controllers/user/user.validator';
 import Schema from '../utils/schema-builder';
 
 const userSchema = Schema({
