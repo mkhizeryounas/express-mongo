@@ -1,7 +1,7 @@
 {
   "presets": [
     [
-      "@babel/preset-env",
+      "env",
       {
         "targets": {
           "node": "current"
@@ -9,5 +9,5 @@
       }
     ]
   ],
-  "plugins": ["@babel/plugin-proposal-object-rest-spread", "@babel/transform-runtime"]
+  "plugins": ["transform-object-rest-spread", "transform-class-properties"]
 }
