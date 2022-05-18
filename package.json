@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "heroku-prebuild": "npm install",
     "postdeploy": "npm run clean && npm run -s build",
     "start": "NODE_ENV=production node dist/index.js",
     "dev": "nodemon src/index.js --exec \"node -r dotenv/config -r @babel/register\"",

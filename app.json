@@ -44,10 +44,6 @@
     "RECAPTCHA_VERIFY_URL": {
       "description": "Recaptcha verify url.",
       "required": false
-    },
-    "NPM_CONFIG_PRODUCTION": {
-      "description": "Setting this to true will only install production dependencies",
-      "value": false
     }
   },
   "scripts": {
