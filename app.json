@@ -1,0 +1,47 @@
+{
+  "name": "Express Mongo",
+  "description": "Express boilerplate with mongodb",
+  "repository": "https://github.com/mkhizeryounas/express-mongo",
+  "logo": "https://png.pngtree.com/svg/20170418/auth_982990.png",
+  "keywords": ["node", "express", "boilerplate"],
+  "env": {
+    "SECRET": {
+      "description": "A secret key for verifying the integrity of signed cookies. Must be 256 bits (32 characters).",
+      "required": true
+    },
+    "MONGO_CONNECTION_STRING": {
+      "description": "Mongodb connection string.",
+      "required": true
+    },
+    "BASE_URL": {
+      "description": "App base URL."
+    },
+    "AWS_ACCESS_KEY_ID": {
+      "description": "AWS access key ID.",
+      "required": true
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "description": "AWS secret access key ID.",
+      "required": true
+    },
+    "AWS_BUCKET": {
+      "description": "AWS bucket name.",
+      "required": true
+    },
+    "AWS_ENDPOINT": {
+      "description": "AWS endpoint url."
+    },
+    "RECAPTCHA_SITE_KEY": {
+      "description": "Recaptcha site key.",
+      "required": true
+    },
+    "RECAPTCHA_SECRET_KEY": {
+      "description": "Recaptcha secret key.",
+      "required": true
+    },
+    "RECAPTCHA_VERIFY_URL": {
+      "description": "Recaptcha verify url."
+    }
+  },
+  "scripts": {}
+}
