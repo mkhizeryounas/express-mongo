@@ -10,7 +10,7 @@
     <p>Welcome to <%= title %></p>
 
     <input type="checkbox" id="regenToken" placeholder="regenToken" />
-    Regenerate Token
+    Regenerate Token?
 
     <br />
     <br />
@@ -51,6 +51,7 @@
         console.log('Getting captcha token');
         return await grecaptcha.execute('<%= siteKey %>', { action: 'demo' });
       };
+
       grecaptcha.ready(async function () {
         token = await getCaptchaToken();
         console.log('captcha ready');
