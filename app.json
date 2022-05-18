@@ -44,10 +44,13 @@
     "RECAPTCHA_VERIFY_URL": {
       "description": "Recaptcha verify url.",
       "required": false
+    },
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "Setting this to true will only install production dependencies",
+      "value": false
     }
   },
   "scripts": {
-    "prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
     "postdeploy": "npm run postdeploy"
   }
 }
