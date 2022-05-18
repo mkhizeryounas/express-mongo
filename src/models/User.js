@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
 import { isEmail } from 'validator';
-import mongoosePaginate from 'mongoose-paginate-v2';
 import common from '../utils/common';
 import { ENUMS } from '../controllers/user/user.validator';
 import Schema from '../utils/schema-builder';
 
-const userSchema = Schema({
+const schemaDef = Schema({
   name: { type: String, required: true },
   email: {
     type: String,
@@ -18,13 +17,13 @@ const userSchema = Schema({
   scope: { type: String, default: 'USER', enum: ENUMS.SCOPES },
 });
 
-userSchema.methods.toJSON = function () {
+schemaDef.methods.toJSON = function () {
   var obj = this.toObject();
   delete obj.password;
   return obj;
 };
 
-userSchema.methods.checkPassword = async function (password) {
+schemaDef.methods.checkPassword = async function (password) {
   if (common.hash(password) === this.password) {
     console.log(this);
     return this;
@@ -32,6 +31,4 @@ userSchema.methods.checkPassword = async function (password) {
   throw { status: 401 };
 };
 
-userSchema.plugin(mongoosePaginate);
-
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', schemaDef);
