@@ -9,6 +9,8 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
+    <p id="response" style="background: #eee; padding: 5px"></p>
+
     <input type="checkbox" id="regenToken" placeholder="regenToken" />
     Regenerate Token?
 
@@ -20,6 +22,7 @@
     <script>
       let token = null;
       const handleSubmit = async () => {
+        let responseHtml = '';
         try {
           if (document.querySelector('#regenToken').checked) {
             token = await getCaptchaToken();
@@ -41,10 +44,26 @@
             throw response;
           }
           console.log('response', response);
+          responseHtml = `
+          <code>
+            <p>
+              <strong>Score:</strong> ${score}
+            </p>
+            <p>
+              <strong>Response:</strong> <pre>${JSON.stringify(
+                response,
+                null,
+                2
+              )}</pre>
+            </p>
+            </code>
+          `;
         } catch (err) {
           console.log('err', err);
-          alert(err.message);
+          responseHtml = `<code><b>Error:</b> ${err.message}</code>`;
         }
+
+        document.querySelector('#response').innerHTML = responseHtml;
       };
 
       const getCaptchaToken = async () => {

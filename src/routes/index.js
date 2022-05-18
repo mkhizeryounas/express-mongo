@@ -13,7 +13,7 @@ router.get('/', async function (req, res) {
 });
 
 // frontend-only-render
-router.get('/frontend-render', async function (req, res) {
+router.get('/secure/view', async function (req, res) {
   res.render('secure', {
     title: 'Secure',
     siteKey: RECAPTCHA.SITE_KEY,
