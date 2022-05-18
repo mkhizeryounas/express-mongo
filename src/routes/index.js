@@ -1,25 +1,33 @@
 import express from 'express';
-import { name } from '../../package.json';
-import multer from '../middlewares/multer';
+import frontendOnlyRequest from '../middlewares/frontend-only-request';
+import { RECAPTCHA } from '../config/keys';
 
 const router = express.Router();
 
 router.get('/', async function (req, res) {
-  res.reply({ data: { about: `${name} service is working fine` } });
+  res.reply({
+    data: {
+      message: 'Hello World!',
+    },
+  });
 });
 
-router.post('/upload', [multer.single('_file')], async (req, res, next) => {
-  try {
-    const { file } = req;
-    if (file?.location && !file.location.startsWith('https://')) {
-      file.location = `https://${file.location}`;
-    }
-    return res.reply({
-      data: file,
-    });
-  } catch (err) {
-    return next(err);
-  }
+// frontend-only-render
+router.get('/secure', async function (req, res) {
+  res.render('secure', {
+    title: 'Secure',
+    siteKey: RECAPTCHA.SITE_KEY,
+  });
+});
+
+// frontend-only-request
+router.post('/secure/sudmit', [frontendOnlyRequest], async function (req, res) {
+  console.log('req.body', req.body);
+  res.reply({
+    data: {
+      status: 'OK',
+    },
+  });
 });
 
 module.exports = router;

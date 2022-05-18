@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://www.google.com/recaptcha/api.js?render=<%= siteKey %>"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <input type="checkbox" id="regenToken" placeholder="regenToken" />
+    Regenerate Token
+
+    <br />
+    <br />
+
+    <button id="button" onclick="handleSubmit()">Submit</button>
+
+    <script>
+      let token = null;
+      const handleSubmit = async () => {
+        try {
+          if (document.querySelector('#regenToken').checked) {
+            token = await getCaptchaToken();
+          }
+          let score = Math.floor(Math.random() * (0 - 100 + 1) + 100);
+          let data = await fetch('/secure/sudmit', {
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            method: 'post',
+            body: JSON.stringify({
+              score,
+              token,
+            }),
+          });
+          const response = await data.json();
+          if (!data.ok) {
+            throw response;
+          }
+          console.log('response', response);
+        } catch (err) {
+          console.log('err', err);
+          alert(err.message);
+        }
+      };
+
+      const getCaptchaToken = async () => {
+        console.log('Getting captcha token');
+        return await grecaptcha.execute('<%= siteKey %>', { action: 'demo' });
+      };
+      grecaptcha.ready(async function () {
+        token = await getCaptchaToken();
+        console.log('captcha ready');
+      });
+    </script>
+  </body>
+</html>

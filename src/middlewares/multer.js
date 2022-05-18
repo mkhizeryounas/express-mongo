@@ -1,21 +1,10 @@
-import aws from 'aws-sdk';
 import multer from 'multer';
 import uuid4 from 'uuid4';
 import { AWS as AWS_KEYS } from '../config/keys';
 import path from 'path';
+import s3 from '../utils/s3';
 
 const s3Storage = require('multer-s3');
-
-const spacesEndpoint = new aws.Endpoint(AWS_KEYS.ENDPOINT);
-
-aws.config.update({
-  accessKeyId: AWS_KEYS.ACCESS_KEY_ID,
-  secretAccessKey: AWS_KEYS.SECRET_ACCESS_KEY,
-});
-
-const s3 = new aws.S3({
-  endpoint: spacesEndpoint,
-});
 
 export default multer({
   storage: s3Storage({
