@@ -1,6 +1,6 @@
 # Express Mongo Boilerplate
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mkhizeryounas/auth-deputy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mkhizeryounas/express-mongo)
 
 This is a simple express boilerplate with mongodb.
 
