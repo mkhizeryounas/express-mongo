@@ -45,7 +45,7 @@
     "RECAPTCHA_VERIFY_URL": {
       "description": "Recaptcha verify url.",
       "required": false,
-      "default": "https://www.google.com/recaptcha/api/siteverify"
+      "value": "https://www.google.com/recaptcha/api/siteverify"
     }
   },
   "scripts": {
