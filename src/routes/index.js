@@ -22,7 +22,6 @@ router.get('/secure/view', async function (req, res) {
 
 // frontend-only-request
 router.post('/secure/sudmit', [frontendOnlyRequest], async function (req, res) {
-  console.log('req.body', req.body);
   res.reply({
     data: {
       status: 'OK',
