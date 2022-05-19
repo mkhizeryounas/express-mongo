@@ -14,6 +14,7 @@ dotenv.config({
 module.exports = {
   NODE_ENV: process.env.NODE_ENV || 'development',
   PORT: process.env.PORT || 3000,
+  LOG_LEVEL: process.env.LOG_LEVEL || 'silly',
   MONGO_CONNECTION_STRING:
     process.env.MONGO_CONNECTION_STRING || 'mongodb://localhost:27017/commerce',
   SECRET: process.env.SECRET || 'c6aSsUzQBACrdWoWy6g7BkuxwKfkPbmB',

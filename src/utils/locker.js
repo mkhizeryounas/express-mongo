@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import common from './common';
 import { SECRET as cert } from '../config/keys';
+import logger from '../utils/logger';
 
 module.exports = {
   unlock: async (request, response, next) => {
@@ -17,7 +18,7 @@ module.exports = {
       request.user = jwt.verify(authHeader, cert);
       return next();
     } catch (err) {
-      console.log('Auth failed:', err.message);
+      logger.error('Auth failed:', err.message);
       return response.reply({ statusCode: 401 });
     }
   },

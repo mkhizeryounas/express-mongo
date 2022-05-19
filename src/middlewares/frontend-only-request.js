@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { RECAPTCHA } from '../config/keys';
+import logger from '../utils/logger';
 
 export default async (req, res, next) => {
   try {
@@ -11,7 +12,7 @@ export default async (req, res, next) => {
     }
     return next();
   } catch (err) {
-    console.log('err', err.message);
+    logger.error(err.message);
     return next(err);
   }
 };

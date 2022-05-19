@@ -25,7 +25,6 @@ schemaDef.methods.toJSON = function () {
 
 schemaDef.methods.checkPassword = async function (password) {
   if (common.hash(password) === this.password) {
-    console.log(this);
     return this;
   }
   throw { status: 401 };

@@ -19,6 +19,11 @@
       "required": false,
       "value": "https://{app-name}.herokuapp.com"
     },
+    "LOG_LEVEL": {
+      "description": "The level of logs in app.",
+      "required": false,
+      "value": "debug"
+    },
     "AWS_ACCESS_KEY_ID": {
       "description": "AWS access key ID.",
       "required": true

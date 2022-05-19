@@ -1,5 +1,6 @@
 import s3 from '../../utils/s3';
 import { AWS as AWS_KEYS } from '../../config/keys';
+import logger from '../../utils/logger';
 
 export const TTL = 60;
 
@@ -9,7 +10,7 @@ export const presignedUrl = ({ fileName, contentType: fileType }) => {
     throw new Error('Invalid content type');
   }
   const fileNameWithExtension = `${fileName}.${fileExtension}`;
-  console.log({ fileExtension, fileNameWithExtension });
+  logger.debug({ fileExtension, fileNameWithExtension });
   const params = {
     Bucket: AWS_KEYS.BUCKET,
     Key: fileNameWithExtension,
