@@ -16,7 +16,8 @@
     },
     "BASE_URL": {
       "description": "App base URL.",
-      "required": false
+      "required": false,
+      "value": "https://{app-name}.herokuapp.com"
     },
     "AWS_ACCESS_KEY_ID": {
       "description": "AWS access key ID.",
