@@ -26,12 +26,12 @@
     "npm": ">=6.4.0"
   },
   "dependencies": {
+    "@babel/runtime": "^7.17.9",
     "aws-sdk": "^2.1046.0",
     "axios": "^0.21.4",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
-    "dotenv": "^6.2.0",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
     "express-recaptcha": "^5.1.0",
@@ -48,7 +48,8 @@
     "multer-s3": "^2.10.0",
     "sha256": "^0.2.0",
     "uuid4": "^2.0.2",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "dotenv": "^7.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
@@ -59,7 +60,6 @@
     "@babel/register": "^7.16.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.4.4",
-    "dotenv": "^7.0.0",
     "eslint": "^8.4.1",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jest": "^25.3.0",
@@ -71,7 +71,7 @@
     "prettier": "^2.5.1",
     "pretty-quick": "^3.1.2",
     "regenerator-runtime": "^0.13.9",
-    "rimraf": "^3.0.2",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "rimraf": "^3.0.2"
   }
 }
