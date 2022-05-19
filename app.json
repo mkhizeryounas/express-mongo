@@ -7,7 +7,8 @@
   "env": {
     "SECRET": {
       "description": "A secret key for verifying the integrity of signed cookies. Must be 256 bits (32 characters).",
-      "required": true
+      "required": true,
+      "generator": "secret"
     },
     "MONGO_CONNECTION_STRING": {
       "description": "Mongodb connection string.",
