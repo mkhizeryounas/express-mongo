@@ -2,7 +2,7 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mkhizeryounas/express-mongo)
 
-This is a simple express boilerplate with mongodb.
+This is a simple express boilerplate with MongoDB.
 
 ### Getting started
 
