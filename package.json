@@ -5,7 +5,8 @@
   "scripts": {
     "heroku-prebuild": "NPM_CONFIG_PRODUCTION=false npm install",
     "postdeploy": "npm run clean && npm run -s build",
-    "start": "NODE_ENV=production node dist/index.js",
+    "start:build": "NODE_ENV=production node dist/index.js",
+    "start": "node src/index.js --exec \"node -r dotenv/config -r @babel/register\"",
     "dev": "nodemon src/index.js --exec \"node -r dotenv/config -r @babel/register\"",
     "clean": "rimraf dist",
     "build": "npm run clean && mkdir -p dist && babel src -s -D -d dist",
