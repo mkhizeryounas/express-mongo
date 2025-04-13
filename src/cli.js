@@ -1,5 +1,5 @@
 const path = require('path');
-const connection = require('./config/db');
+const connection = require('@/config/db');
 
 const filePath = process.argv[2];
 

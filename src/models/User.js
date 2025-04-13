@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import { isEmail } from 'validator';
-import common from '../utils/common';
-import { ENUMS } from '../controllers/user/user.validator';
-import Schema from '../utils/schema-builder';
+import common from '@/utils/common';
+import { ENUMS } from '@/validators/user.validator';
+import Schema from '@/utils/schema-builder';
 
 const schemaDef = Schema({
   name: { type: String, required: true },

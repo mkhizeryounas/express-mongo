@@ -1,13 +1,14 @@
 import express from 'express';
-import multer from '../middlewares/multer';
+import multer from '@/middlewares/multer';
 import validate from 'express-validation';
-import * as uploadController from '../controllers/upload/upload.controller';
-import * as uploadValidator from '../controllers/upload/upload.validator';
+import * as uploadController from '@/controllers/upload.controller';
+import * as uploadValidator from '@/validators/upload.validator';
 import uuid4 from 'uuid4';
+import { unlock } from '@/utils/locker';
 
 const router = express.Router();
 
-router.post('/', [multer.single('_file')], async (req, res, next) => {
+router.post('/', [unlock, multer.single('_file')], async (req, res, next) => {
   try {
     const { file } = req;
     if (file?.location && !file.location.startsWith('https://')) {

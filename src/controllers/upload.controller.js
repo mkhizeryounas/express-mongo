@@ -1,6 +1,6 @@
-import s3 from '../../utils/s3';
-import { AWS as AWS_KEYS } from '../../config/keys';
-import logger from '../../utils/logger';
+import s3 from '@/utils/s3';
+import { AWS as AWS_KEYS } from '@/config/keys';
+import logger from '@/utils/logger';
 
 export const TTL = 60;
 

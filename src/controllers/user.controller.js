@@ -1,5 +1,5 @@
-import { User } from '../../models';
-import { lock } from '../../utils/locker';
+import { User } from '@/models';
+import { lock } from '@/utils/locker';
 
 export const create = async (
   { name, email, password, scope = 'USER' },

@@ -1,8 +1,8 @@
 import multer from 'multer';
 import uuid4 from 'uuid4';
-import { AWS as AWS_KEYS } from '../config/keys';
+import { AWS as AWS_KEYS } from '@/config/keys';
 import path from 'path';
-import s3 from '../utils/s3';
+import s3 from '@/utils/s3';
 
 const s3Storage = require('multer-s3');
 

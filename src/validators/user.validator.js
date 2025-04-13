@@ -1,4 +1,4 @@
-import Joi from '../../utils/joi';
+import Joi from '../utils/joi';
 
 export const ENUMS = {
   SCOPES: ['ADMIN', 'USER'],
