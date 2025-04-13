@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const { default: appLoagger } = require('./utils/logger');
 require('module-alias/register');
 
 const app = express();
@@ -21,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'src', 'public')));
 app.use(require('./middlewares/response'));
 app.use(require('cors')());
 
-app.use('/', require('./config/routes'));
+app.use('/', require('./routes'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {
@@ -33,10 +32,13 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   // res.locals.error = req.app.get("env") === "development" ? err : {};
-  appLoagger.error(err);
   if (err.isJoi || err.hasOwnProperty('errors') || err.name === 'MongoError') {
     err.status = 422;
   }
+  if (err.name === 'ValidationError' && err?.errors?.map) {
+    err.errors = err?.errors?.map((error) => error?.messages?.[0]);
+  }
+
   res.reply({
     message: err.message,
     statusCode: err.status || 400,

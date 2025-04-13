@@ -38,4 +38,6 @@ export const Logger = (prefix) => {
   }, {});
 };
 
+export const getLogger = Logger;
+
 export default Logger(name);

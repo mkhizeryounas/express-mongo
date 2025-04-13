@@ -5,12 +5,23 @@ import * as uploadController from '@/controllers/upload.controller';
 import * as uploadValidator from '@/validators/upload.validator';
 import uuid4 from 'uuid4';
 import { unlock } from '@/utils/locker';
+import { ValidationError } from 'express-validation';
 
 const router = express.Router();
 
 router.post('/', [unlock, multer.single('_file')], async (req, res, next) => {
   try {
     const { file } = req;
+    if (!file) {
+      throw new ValidationError(
+        [
+          {
+            messages: ['"_file" is required'],
+          },
+        ],
+        {}
+      );
+    }
     if (file?.location && !file.location.startsWith('https://')) {
       file.location = `https://${file.location}`;
     }
