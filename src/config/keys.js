@@ -25,11 +25,4 @@ module.exports = {
     BUCKET: process.env.AWS_BUCKET || '',
     ENDPOINT: process.env.AWS_ENDPOINT || '',
   },
-  RECAPTCHA: {
-    SITE_KEY: process.env.RECAPTCHA_SITE_KEY || '',
-    SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY || '',
-    VERIFY_URL:
-      process.env.RECAPTCHA_VERIFY_URL ||
-      'https://www.google.com/recaptcha/api/siteverify',
-  },
 };
