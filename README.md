@@ -12,6 +12,15 @@ Edit `.env` file according to your keys.
 yarn start
 ```
 
+### Admin
+
+```
+/admin
+```
+
+![image](https://github.com/user-attachments/assets/90775c48-7bd1-41c1-9add-dd15e22fbd57)
+
+
 ### Contributing
 
 Feel free to submit pull requests.
