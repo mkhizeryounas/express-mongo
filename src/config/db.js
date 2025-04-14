@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var { MONGO_CONNECTION_STRING } = require('@/config/keys');
+import mongoose from 'mongoose';
+import { MONGO_CONNECTION_STRING } from '@/config/keys';
 
 mongoose.connect(MONGO_CONNECTION_STRING, {
   useNewUrlParser: true,
