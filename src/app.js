@@ -3,7 +3,7 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import db from '@/config/db';
-import responseMiddleware from '@/middlewares/response';
+import responseMiddleware from '@/middlewares/response.middleware';
 import cors from 'cors';
 import routes from '@/routes';
 import { adminJs, adminRouter } from '@/admin';

@@ -1,5 +1,5 @@
 import express from 'express';
-import multer from '@/middlewares/multer';
+import multerMiddleware from '@/middlewares/multer.middleware';
 import validate from 'express-validation';
 import * as uploadController from '@/controllers/upload.controller';
 import * as uploadValidator from '@/validators/upload.validator';
@@ -9,29 +9,33 @@ import { ValidationError } from 'express-validation';
 
 const router = express.Router();
 
-router.post('/', [unlock, multer.single('_file')], async (req, res, next) => {
-  try {
-    const { file } = req;
-    if (!file) {
-      throw new ValidationError(
-        [
-          {
-            messages: ['"_file" is required'],
-          },
-        ],
-        {}
-      );
+router.post(
+  '/',
+  [unlock, multerMiddleware.single('_file')],
+  async (req, res, next) => {
+    try {
+      const { file } = req;
+      if (!file) {
+        throw new ValidationError(
+          [
+            {
+              messages: ['"_file" is required'],
+            },
+          ],
+          {}
+        );
+      }
+      if (file?.location && !file.location.startsWith('https://')) {
+        file.location = `https://${file.location}`;
+      }
+      return res.reply({
+        data: file,
+      });
+    } catch (err) {
+      return next(err);
     }
-    if (file?.location && !file.location.startsWith('https://')) {
-      file.location = `https://${file.location}`;
-    }
-    return res.reply({
-      data: file,
-    });
-  } catch (err) {
-    return next(err);
   }
-});
+);
 
 router.post(
   '/pre-signed',
