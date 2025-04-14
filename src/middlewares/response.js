@@ -1,4 +1,4 @@
-const HttpStatus = require('http-status-codes');
+import HttpStatus from 'http-status-codes';
 
 const COMMON_MESSAGES = {
   200: 'Request processed successfully.',

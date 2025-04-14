@@ -1,26 +1,30 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-require('module-alias/register');
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import db from '@/config/db';
+import responseMiddleware from '@/middlewares/response';
+import cors from 'cors';
+import routes from '@/routes';
+import { adminJs, adminRouter } from '@/admin';
 
 const app = express();
 
-app.set('DB', require('./config/db'));
+app.set('DB', db);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(adminJs.options.rootPath, adminRouter);
 app.use(logger('dev'));
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src', 'public')));
-app.use(require('./middlewares/response'));
-app.use(require('cors')());
-
-app.use('/', require('./routes'));
+app.use(responseMiddleware);
+app.use(cors());
+app.use(express.json());
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {
