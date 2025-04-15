@@ -30,7 +30,7 @@
     "@adminjs/mongoose": "^4.1.0",
     "@mkhizeryounas/logger": "^1.0.4",
     "adminjs": "^7.8.15",
-    "aws-sdk": "^2.1046.0",
+    "aws-sdk": "^2.1692.0",
     "axios": "^0.30.0",
     "body-parser": "^2.2.0",
     "cli-color": "^2.0.2",
