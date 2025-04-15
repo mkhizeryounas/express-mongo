@@ -29,7 +29,7 @@ const adminRouter = AdminJSExpress.buildAuthenticatedRouter(
   adminJs,
   {
     authenticate: async (email, password) => {
-      const user = await User.findOne({ email, password });
+      const user = await User.findOne({ email, password, scope: 'ADMIN' });
       if (user) {
         return user;
       }
