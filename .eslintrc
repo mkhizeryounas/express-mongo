@@ -1,12 +1,22 @@
 {
   "env": {
     "node": true,
-    "es6": true
+    "es6": true,
+    "browser": true
   },
-
   "parserOptions": {
     "ecmaVersion": 2022,
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["react", "react-hooks"],
+  "extends": ["plugin:react/recommended", "prettier"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
   "globals": {
     "Promise": true
@@ -67,6 +77,10 @@
     ],
     "semi": ["error", "always"],
     "semi-spacing": ["warn", { "before": false, "after": true }],
-    "semi-style": ["warn", "last"]
+    "semi-style": ["warn", "last"],
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }

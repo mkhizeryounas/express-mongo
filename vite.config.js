@@ -7,4 +7,10 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  test: {
+    globals: true,
+    environment: 'node',
+    include: ['src/**/*.test.js'], // adjust to your test location
+    exclude: ['node_modules', 'dist'],
+  },
 });
