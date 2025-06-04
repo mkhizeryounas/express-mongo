@@ -1,6 +1,5 @@
 import { SECRET } from '../config/keys';
 import sha256 from 'sha256';
-import Joi from 'joi';
 
 module.exports = {
   parse: (msg) => {
@@ -13,15 +12,11 @@ module.exports = {
     return sha256(str + SECRET);
   },
   validate: async (obj, schema) => {
-    return new Promise((resolve, reject) => {
-      Joi.validate(obj || {}, schema, function (error, value) {
-        if (error) {
-          error.responseCode = 422; // validation error
-          reject(error);
-        } else {
-          resolve(value);
-        }
-      });
-    });
+    try {
+      return schema.parse(obj || {});
+    } catch (error) {
+      error.responseCode = 422;
+      throw error;
+    }
   },
 };

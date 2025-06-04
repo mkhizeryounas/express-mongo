@@ -1,11 +1,10 @@
 import express from 'express';
 import multerMiddleware from '@/middlewares/multer.middleware';
-import validate from 'express-validation';
+import validate from '@/middlewares/validate.middleware.js';
 import * as uploadController from '@/controllers/upload.controller';
 import * as uploadValidator from '@/validators/upload.validator';
 import uuid4 from 'uuid4';
 import { unlock } from '@/utils/locker';
-import { ValidationError } from 'express-validation';
 
 const router = express.Router();
 
@@ -16,14 +15,14 @@ router.post(
     try {
       const { file } = req;
       if (!file) {
-        throw new ValidationError(
-          [
+        throw {
+          name: 'ValidationError',
+          errors: [
             {
               messages: ['"_file" is required'],
             },
           ],
-          {}
-        );
+        };
       }
       if (file?.location && !file.location.startsWith('https://')) {
         file.location = `https://${file.location}`;
