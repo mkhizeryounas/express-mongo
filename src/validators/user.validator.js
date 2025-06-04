@@ -1,21 +1,21 @@
-import Joi from '../utils/joi';
+import { z } from 'zod';
 
 export const ENUMS = {
   SCOPES: ['ADMIN', 'USER'],
 };
 
 export const create = {
-  body: {
-    name: Joi.string().required(),
-    email: Joi.string().required(),
-    password: Joi.string().required(),
-    scope: Joi.string().valid(ENUMS.SCOPES),
-  },
+  body: z.object({
+    name: z.string(),
+    email: z.string(),
+    password: z.string(),
+    scope: z.enum(ENUMS.SCOPES).optional(),
+  }),
 };
 
 export const signin = {
-  body: {
-    email: Joi.string().required(),
-    password: Joi.string().required(),
-  },
+  body: z.object({
+    email: z.string(),
+    password: z.string(),
+  }),
 };

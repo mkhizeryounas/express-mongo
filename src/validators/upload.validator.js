@@ -1,8 +1,8 @@
-import Joi from '@/utils/joi';
+import { z } from 'zod';
 
 export const preSigned = {
-  body: {
-    fileName: Joi.string().required(),
-    contentType: Joi.string().required(),
-  },
+  body: z.object({
+    fileName: z.string(),
+    contentType: z.string(),
+  }),
 };

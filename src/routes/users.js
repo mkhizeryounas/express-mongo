@@ -1,6 +1,6 @@
 import express from 'express';
 import { unlock } from '@/utils/locker';
-import validate from 'express-validation';
+import validate from '@/middlewares/validate.middleware.js';
 import * as userController from '@/controllers/user.controller';
 import * as userValidator from '@/validators/user.validator';
 
